@@ -40,7 +40,7 @@ verify_stopped() {
   container=$1
   run docker exec ${container} bash -c "ps aux | grep [m]ysqld"
   echo_lines
-  [ "$status" -eq 1 ] 
+  [ "$status" -eq 1 ]
 }
 
 insert_test_data() {
@@ -49,10 +49,10 @@ insert_test_data() {
   port=$3
   key=$4
   data=$5
-  run docker exec ${container} bash -c "/data/bin/mysql -u nanobox -ppassword -e 'CREATE TABLE IF NOT EXISTS test_table (id text, value text)' gonano 2> /dev/null"
+  run docker exec ${container} bash -c "/data/bin/mysql -u microbox -ppassword -e 'CREATE TABLE IF NOT EXISTS test_table (id text, value text)' gomicro 2> /dev/null"
   echo_lines
   [ "$status" -eq 0 ]
-  run docker exec ${container} bash -c "/data/bin/mysql -u nanobox -ppassword -e 'INSERT INTO test_table VALUES ('\"'\"'${key}'\"'\"', '\"'\"'${data}'\"'\"')' gonano 2> /dev/null"
+  run docker exec ${container} bash -c "/data/bin/mysql -u microbox -ppassword -e 'INSERT INTO test_table VALUES ('\"'\"'${key}'\"'\"', '\"'\"'${data}'\"'\"')' gomicro 2> /dev/null"
   echo_lines
   [ "$status" -eq 0 ]
 
@@ -64,7 +64,7 @@ update_test_data() {
   port=$3
   key=$4
   data=$5
-  run docker exec ${container} bash -c "/data/bin/mysql -u nanobox -ppassword -e 'UPDATE test_table SET value = '\"'\"'${data}'\"'\"' WHERE id = '\"'\"'${key}'\"'\"'' gonano 2> /dev/null"
+  run docker exec ${container} bash -c "/data/bin/mysql -u microbox -ppassword -e 'UPDATE test_table SET value = '\"'\"'${data}'\"'\"' WHERE id = '\"'\"'${key}'\"'\"'' gomicro 2> /dev/null"
   echo_lines
   [ "$status" -eq 0 ]
 }
@@ -76,7 +76,7 @@ verify_test_data() {
   key=$4
   data=$5
   sleep 1
-  run docker exec ${container} bash -c "/data/bin/mysql -u nanobox -ppassword -e 'SELECT value FROM test_table WHERE id = '\"'\"'${key}'\"'\"'' gonano 2> /dev/null"
+  run docker exec ${container} bash -c "/data/bin/mysql -u microbox -ppassword -e 'SELECT value FROM test_table WHERE id = '\"'\"'${key}'\"'\"'' gomicro 2> /dev/null"
   echo_lines
   [ "${lines[1]}" = "${data}" ]
   [ "$status" -eq 0 ]
@@ -88,7 +88,7 @@ verify_plan() {
 {
   "redundant": false,
   "horizontal": false,
-  "user": "nanobox",
+  "user": "microbox",
   "users": [
     {
       "username": "root",
@@ -106,12 +106,12 @@ verify_plan() {
       }
     },
     {
-      "username": "nanobox",
+      "username": "microbox",
       "meta": {
         "privileges": [
           {
             "privilege": "ALL PRIVILEGES",
-            "on": "gonano.*",
+            "on": "gomicro.*",
             "with_grant": true
           },
           {
@@ -126,7 +126,7 @@ verify_plan() {
           }
         ],
         "databases": [
-          "gonano"
+          "gomicro"
         ]
       }
     }

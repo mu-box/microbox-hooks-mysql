@@ -10,9 +10,9 @@ before_install:
   - sudo apt-get -y purge docker-engine
   - bash <(curl -fsSL https://get.docker.com/)
   - docker version
-  - docker network create --driver=bridge --subnet=192.168.0.0/16 --opt="com.docker.network.driver.mtu=1450" --opt="com.docker.network.bridge.name=redd0" nanobox
+  - docker network create --driver=bridge --subnet=192.168.0.0/16 --opt="com.docker.network.driver.mtu=1450" --opt="com.docker.network.bridge.name=redd0" microbox
   - ifconfig
   - echo building $VERSION
-  - docker pull nanobox/mysql:$VERSION
+  - docker pull mubox/mysql:$VERSION
 
 script: sudo stdbuf -oL test/run_all.sh $VERSION

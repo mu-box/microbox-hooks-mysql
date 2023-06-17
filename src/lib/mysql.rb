@@ -12,7 +12,7 @@ module Hooky
     DEFAULT_PRIVILEGES = [
       {
         privilege: "ALL PRIVILEGES",
-        on: "gonano.*",
+        on: "gomicro.*",
         with_grant: true
       },
       {
@@ -34,7 +34,7 @@ module Hooky
 
     DEFAULT_META = {
       privileges: DEFAULT_PRIVILEGES,
-      databases: ["gonano"]
+      databases: ["gomicro"]
     }
 
     DEFAULT_USERS = [
@@ -43,24 +43,24 @@ module Hooky
         meta: DEFAULT_ROOT_META
       },
       {
-        username: "nanobox",
+        username: "microbox",
         meta: DEFAULT_META
       }
     ]
 
     USER_META_PRVILIGES_DEFAULTS = {
       privilege:    {type: :string, from: ["ALL", "ALL PRIVILEGES", "ALTER", "ALTER ROUTINE", "CREATE", "CREATE ROUTINE", "CREATE TABLESPACE", "CREATE TEMPORARY TABLES", "CREATE USER", "CREATE VIEW", "DELETE", "DROP", "EVENT", "EXECUTE", "FILE", "GRANT OPTION", "INDEX", "INSERT", "LOCK TABLES", "PROCESS", "PROXY", "REFERENCES", "RELOAD", "REPLICATION CLIENT", "REPLICATION SLAVE", "SELECT", "SHOW DATABASES", "SHOW VIEW", "SHUTDOWN", "SUPER", "TRIGGER", "UPDATE", "USAGE"], default: "SELECT"},
-      on:           {type: :string, default: 'gonano.*'},
+      on:           {type: :string, default: 'gomicro.*'},
       with_grant:   {type: :on_off, default: false}
     }
 
     USER_META_DEFAULTS = {
       privileges:    {type: :array, of: :hash, template: USER_META_PRVILIGES_DEFAULTS, default: DEFAULT_PRIVILEGES},
-      databases:     {type: :array, of: :string, default: ["gonano"]}
+      databases:     {type: :array, of: :string, default: ["gomicro"]}
     }
 
     USER_DEFAULTS = {
-      username:      {type: :string, default: 'gonano'},
+      username:      {type: :string, default: 'gomicro'},
       meta:          {type: :hash, template: USER_META_DEFAULTS, default: DEFAULT_META}
     }
 

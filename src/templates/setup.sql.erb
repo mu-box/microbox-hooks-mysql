@@ -14,16 +14,16 @@ SET PASSWORD FOR '<%= user[:username] %>' = PASSWORD('<%= user[:password] %>');
 -- GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 
 -- create default database
--- CREATE DATABASE IF NOT EXISTS gonano;
+-- CREATE DATABASE IF NOT EXISTS gomicro;
 
 -- give supreme control of default database to default user
--- GRANT ALL PRIVILEGES ON gonano.* TO 'nanobox'@'%' identified by 'password' WITH GRANT OPTION;
+-- GRANT ALL PRIVILEGES ON gomicro.* TO 'microbox'@'%' identified by 'password' WITH GRANT OPTION;
 
 -- give default database user permission to SHOW (ENGINE|PROCESSLIST)
--- GRANT PROCESS ON *.* TO 'nanobox'@'%';
+-- GRANT PROCESS ON *.* TO 'microbox'@'%';
 
 -- give default user super privilege
--- GRANT SUPER ON *.* TO 'nanobox'@'%';
+-- GRANT SUPER ON *.* TO 'microbox'@'%';
 
 -- remove anonymous accounts (must ensure exists before deleting)
 GRANT USAGE ON *.* TO ''@'localhost';
